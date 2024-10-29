@@ -86,6 +86,51 @@ Este tutorial cubre comandos básicos en Ubuntu organizados por temas: manejo de
   
   `chgrp grupo nombre_del_archivo`
 
+# Tabla de Permisos en Linux
+
+En Linux, los permisos se dividen en tres categorías: **usuario (u)**, **grupo (g)** y **otros (o)**. Cada categoría puede tener permisos de lectura, escritura y ejecución.
+
+| Permiso | Símbolo | Valor Numérico | Descripción                                                                                         |
+| ------- | ------- | -------------- | --------------------------------------------------------------------------------------------------- |
+| Lectura | `r`     | 4              | Permite leer el contenido del archivo o listar el contenido de un directorio.                       |
+| Escritura | `w`   | 2              | Permite modificar el contenido del archivo o crear, renombrar y eliminar archivos en un directorio. |
+| Ejecución | `x`   | 1              | Permite ejecutar un archivo como un programa o entrar en un directorio.                             |
+
+Cada conjunto de permisos se representa con tres caracteres, y los permisos completos de un archivo se expresan en un formato de 10 caracteres, como en el siguiente ejemplo:
+
+
+### Desglose de Permisos
+
+- **Primer carácter**: Indica el tipo de archivo. Puede ser:
+  - `-` : Archivo regular
+  - `d` : Directorio
+  - `l` : Enlace simbólico
+
+- **Los siguientes 9 caracteres**: Muestran los permisos para **usuario (u)**, **grupo (g)** y **otros (o)** en bloques de tres, en este orden.
+
+### Ejemplo de Permisos
+
+| Permisos  | Usuario (u) | Grupo (g) | Otros (o) | Valor Numérico | Significado                                              |
+| --------- | ----------- | --------- | --------- | -------------- | -------------------------------------------------------- |
+| `rwxr-xr--` | rwx         | r-x       | r--       | 754            | Usuario: leer, escribir, ejecutar; Grupo: leer, ejecutar; Otros: leer |
+| `rw-r--r--` | rw-         | r--       | r--       | 644            | Usuario: leer, escribir; Grupo: leer; Otros: leer         |
+| `rwx------` | rwx         | ---       | ---       | 700            | Usuario: leer, escribir, ejecutar; Grupo y Otros: sin permisos |
+| `rwxrwxrwx` | rwx         | rwx       | rwx       | 777            | Usuario, Grupo, Otros: todos los permisos (leer, escribir, ejecutar) |
+
+### Modificación de Permisos con `chmod`
+
+Puedes usar el comando `chmod` para cambiar permisos. Existen dos modos para hacerlo: el modo simbólico y el modo numérico.
+
+- **Modo Simbólico**: Usa letras para indicar el tipo de permisos.
+  - `chmod u+rwx nombre_del_archivo` : Da permisos de lectura, escritura y ejecución al usuario.
+  - `chmod g-w nombre_del_archivo` : Elimina el permiso de escritura del grupo.
+
+- **Modo Numérico**: Usa números para asignar permisos de usuario, grupo y otros.
+  - `chmod 755 nombre_del_archivo` : Da todos los permisos al usuario, y permisos de lectura y ejecución al grupo y a otros.
+  - `chmod 644 nombre_del_archivo` : Permite leer y escribir al usuario, y solo leer al grupo y otros.
+
+Recuerda que la suma de los valores de permisos te permite configurar los niveles de acceso exactos que deseas otorgar.
+
 ---
 
 ## 4. Información del Sistema
